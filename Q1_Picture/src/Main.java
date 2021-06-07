@@ -60,19 +60,19 @@ public class Main {
     }
 
     // DFS 
-    static void dfs(int k1, int k2) {
-        visited[k1][k2] = true;
+    static void dfs(int v, int h) {
+        visited[v][h] = true;
 
         for (int i = 0; i < 4; i++) {
             if 
             (
-                k1 + x[i] >= 0 && k1 + x[i] < vertical && 
-                k2 + y[i] >= 0 && k2 + y[i] < horizontal && 
-                paper[k1 + x[i]][k2 + y[i]] == 1 && 
-                !visited[k1 + x[i]][k2 + y[i]]
+                v + x[i] >= 0 && v + x[i] < vertical && 
+                h + y[i] >= 0 && h + y[i] < horizontal && 
+                paper[v + x[i]][h + y[i]] == 1 && 
+                !visited[v + x[i]][h + y[i]]
             ) {
                     tempPicture++;
-                dfs(k1 + x[i], k2 + y[i]);
+                dfs(v + x[i], h + y[i]);
             }
         }
     }
