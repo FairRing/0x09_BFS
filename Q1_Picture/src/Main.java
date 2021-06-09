@@ -1,49 +1,98 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 /**
- * node
+ * Location
  */
- class Node {
-    private int x;
-    private int y;
+class Location {
+    int x, y;
 
-    public Node(int x, int y) {
+    public Location(int x, int y) {
+        super();
         this.x = x;
         this.y = y;
     }
-    public void setX(int x) {this.x = x;}
-    public void setY(int y) {this.y = y;}
-    public int getX() {return x;}
-    public int getY() {return y;}
 }
 public class Main {
 
-    public static void main() throws Exception {
+    /* init */
+    static int[][] map;           // map
+    static boolean[][] isVisited; // map 요소 방문여부 
+    static int vertical;          // map 세로
+    static int horizontal;        // map 가로
+    /*      (0 ,1)
+    (-1,0)  (0, 0)  (1,0)
+            (0,-1)        */
+    static Queue<Location> location;
+    static int x_[] = {1, 0, -1, 0};
+    static int y_[] = {0, 1, 0, -1};
+    /* result */
+    static int pictureCount = 0;
+    static int maxSizePicture = 0;
+ 
+    public static void main(String[] args) throws Exception {
     
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        /* BFS START */
+        // INPUT CONSOLE 1st LINE... >>> set [][]
+        StringTokenizer stringTokenizer = new StringTokenizer(bufferedReader.readLine());
+        vertical = Integer.parseInt(stringTokenizer.nextToken());
+        horizontal = Integer.parseInt(stringTokenizer.nextToken());
+        map = new int[vertical][horizontal];
+        isVisited = new boolean[vertical][horizontal];
 
-        int garo;
-        int sero;
+        // INPUT CONSOLE 2nd LINE... >>> pictures location info
+        for (int i = 0; i < vertical; i++) {
+			stringTokenizer = new StringTokenizer(bufferedReader.readLine());
+			for (int j = 0; j < horizontal; j++) {
+				map[i][j] = Integer.parseInt(stringTokenizer.nextToken());
+			}
+		}
+        for (int i = 0; i < vertical; i++) {
+			for (int j = 0; j < horizontal; j++) {
+				if (map[i][j] == 1 && !isVisited[i][j]) {
+					BFS(i, j);
+				}
+			}
+		}
 
-        int[][] ground;
-        boolean[][] visited;
-        /*------(x, y)-------
-                (0 ,1)
-        (-1,0)  (0, 0)  (1,0)
-                (0,-1)
-        -------------------*/
-        Node[] xy = new Node[4];
-        for (int i = 0; i < 4; i++) {
-            xy[i].setX(x);
-        }
+        // OUTPUT RESULT
+        System.out.println(pictureCount);
+		System.out.println(maxSizePicture);
     }
+
+    public static void BFS(int x, int y) {
+
+		location = new LinkedList<>();
+		location.add(new Location(x, y));
+		
+        int count = 0;
+		
+        while (!location.isEmpty()) {
+			Location target = location.poll();		
+			count++;
+
+			for (int loc = 0; loc < 4; loc++) {
+
+                int x__ = target.x + x_[loc];
+                int y__ = target.y + y_[loc];
+                
+                if (x__ < 0 || x__ >= vertical || y__ < 0 || y__ >= horizontal) continue; // map의 바깥인지 체크
+                if (isVisited[x__][y__] || map[x__][y__] == 0) continue; // 이미 방문한 위치인지, 그림이 아닌 위치인지 체크
+                
+                isVisited[x__][y__] = true;
+                location.add(new Location(x__, y__));
+            }
+		}
+		
+		pictureCount++;
+		if(count>1) count--;
+		maxSizePicture = Math.max(maxSizePicture, count);	
+	}
 }
-
-
 
 
 
