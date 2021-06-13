@@ -7,7 +7,7 @@
 | 3   | [7576](https://www.acmicpc.net/problem/7576)   | 토마토             |  O   |
 | 4   | [4179](https://www.acmicpc.net/problem/4179)   | 불                 |  X   |
 | 5   | [1697](https://www.acmicpc.net/problem/1697)   | 숨바꼭질           |  O   |
-| 6   | [1012](https://www.acmicpc.net/problem/1012)   | 유기농 배추        |  X   |
+| 6   | [1012](https://www.acmicpc.net/problem/1012)   | 유기농 배추        |  O   |
 | 7   | [7569](https://www.acmicpc.net/problem/7569)   | 토마토             |  O   |
 | 8   | [9466](https://www.acmicpc.net/problem/9466)   | 텀 프로젝트        |  X   |
 | 9   | [2583](https://www.acmicpc.net/problem/2583)   | 영역 구하기        |  X   |
