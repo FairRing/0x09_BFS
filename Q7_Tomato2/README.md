@@ -1,4 +1,4 @@
-# 토마토 출처분류
+# 토마토
 
 - 출처 : [https://www.acmicpc.net/problem/7569](https://www.acmicpc.net/problem/7569)
 
