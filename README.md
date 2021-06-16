@@ -12,7 +12,7 @@
 | 8   | [9466](https://www.acmicpc.net/problem/9466)   | 텀 프로젝트        |  X   |
 | 9   | [2583](https://www.acmicpc.net/problem/2583)   | 영역 구하기        |  O   |
 | 10  | [2667](https://www.acmicpc.net/problem/2667)   | 단지번호붙이기     |  O   |
-| 11  | [7562](https://www.acmicpc.net/problem/7562)   | 나이트의 이동      |  X   |
+| 11  | [7562](https://www.acmicpc.net/problem/7562)   | 나이트의 이동      |  O   |
 | 12  | [10026](https://www.acmicpc.net/problem/10026) | 적록색약           |  X   |
 | 13  | [2206](https://www.acmicpc.net/problem/2206)   | 벽 부수고 이동하기 |  X   |
 | 14  | [2468](https://www.acmicpc.net/problem/2468)   | 안전 영역          |  X   |
