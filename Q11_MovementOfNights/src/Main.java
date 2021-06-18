@@ -1,6 +1,6 @@
 import java.io.*;
-import java.awt.Point;
 import java.util.*;
+import java.awt.Point;
 
 public class Main {
     static int testCase; // 테스트갯수
@@ -56,6 +56,7 @@ public class Main {
             result = 0;
 			queue.clear();
         }
+
         sc.close();
     }
 }
