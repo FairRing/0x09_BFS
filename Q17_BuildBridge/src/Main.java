@@ -1,70 +1,126 @@
 import java.io.*;
 import java.util.*;
 
-
 public class Main {
 
     static class Location {
-        int x, y, type, id; // i, j , 0||1, default = 0(undifined)
-        public Location(int x, int y, int type, int id){
+        int x, y;
+        Location(int x, int y) {
             this.x = x;
             this.y = y;
-            this.type = type;
-            this.id = id;
         }
     }
 
-    static int n, bridgeSize;
-    static int map[][], visited[][];
-    static int aroundX[] = {1,-1,0,0}, aroundY[] = {0,0,-1,1};
-    public static void main(String[] args) throws IOException {
+    static int n, bridgeMinSize;
+    static int[][] map, aroudXY = {{1,0}, {-1,0}, {0,-1}, {0,1}};
+    static boolean[][] visited;
+    static Queue<Location> queue;
 
+    public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        n  = Integer.parseInt(reader.readLine());
+        StringTokenizer token = null;
+
+        n = Integer.parseInt(reader.readLine());
+
+        queue = new LinkedList<>();
         map = new int[n][n];
-        
-        for (int i = 0; i < n; i++) {
-            String input[] = reader.readLine().split(" ");
-            for (int j = 0; j < n; j++) {
-                map[i][j] = Integer.parseInt(input[j]);
+        visited = new boolean[n][n];
+        bridgeMinSize = Integer.MAX_VALUE;
+
+        for (int x = 0; x < n; ++x) {
+            token = new StringTokenizer(reader.readLine());
+            for (int y = 0; y < n; ++y) {
+                map[x][y] = Integer.parseInt(token.nextToken());
             }
         }
 
-        // 육지별로 묶자
-        System.out.println(n);
+        giveId();
+
+        for (int x = 0; x < n; ++x) {
+            for (int y = 0; y < n; ++y) {
+                if (map[x][y] == 0) continue;
+
+                init();
+
+                queue.offer(new Location(x, y));
+                visited[x][y] = true;
+                int bridgeSize = findMinimumBridgeSize(map[x][y]);
+
+                if (bridgeSize == -1) continue;
+
+                bridgeMinSize = bridgeMinSize > bridgeSize ? bridgeSize : bridgeMinSize;
+            }
+        }
+        System.out.println(bridgeMinSize);
     }
 
-    public void countLands() {
-        Queue<Location> queue = new LinkedList<Location>();
-        ArrayList<Location> landInfo = new ArrayList<Location>();
-        visited = new int[n][n];
-        Location location;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+    private static int findMinimumBridgeSize(int start) {
+        int bridgeSize = -1;
 
-                int idMax;
-                if (landInfo.isEmpty()) idMax = 1;
-                else idMax = landInfo.get(landInfo.size()-1).id;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
 
-                if (map[i][j] == 1) {
-                    location = new Location(i, j, map[i][j], idMax);
-                    landInfo.add(location);
-                    queue.offer(location);
+            for (int s = 0; s < size; ++s) {
+                Location latest = queue.poll();
+
+                if (map[latest.x][latest.y] != 0 && map[latest.x][latest.y] != start) {
+                    return bridgeSize;
                 }
-                
-                // pm9:54 cut... try again...
-                for (int k = 0; k < 4; k++) {
-                    int ax = i + aroundX[k]; 
-                    int ay = j + aroundY[k];
 
-                    if ((-1 < ax) && (ax < n) && (-1 < ay) && (ay < n)) {
-                        
+                for (int a = 0; a < 4; ++a) {
+                    int ax = latest.x + aroudXY[a][0];
+                    int ay = latest.y + aroudXY[a][1];
+
+                    if (ax < 0 || ax >= n || ay < 0 || ay >= n) continue;
+                    if (visited[ax][ay] || map[ax][ay] == start) continue;
+
+                    queue.offer(new Location(ax, ay));
+                    visited[ax][ay] = true;
+                }
+            }
+            bridgeSize++;
+        }
+        return -1;
+    }
+
+    private static void init() {
+        queue.clear();
+
+        for (int x = 0; x < n; ++x) {
+            for (int y = 0; y < n; ++y) {
+                visited[x][y] = false;
+            }
+        }
+    }
+
+    private static void giveId() {
+        int id = 2;
+
+        for (int x = 0; x < n; ++x) {
+            for (int y = 0; y < n; ++y) {
+                if (visited[x][y] || map[x][y] == 0) continue;
+                
+                map[x][y] = id;
+                queue.offer(new Location(x, y));
+                visited[x][y] = true;
+
+                while (!queue.isEmpty()) {
+                    Location latest = queue.poll();
+
+                    for (int a = 0; a < 4; ++a) {
+                        int ax = latest.x + aroudXY[a][0];
+                        int ay = latest.y + aroudXY[a][1];
+                        if (ax < 0 || ax >= n || ay < 0 || ay >= n || visited[ax][ay] || map[ax][ay] == 0) continue;
+                        if (map[ax][ay] == 1) {
+                            queue.offer(new Location(ax, ay));
+                            map[ax][ay] = id;
+                            visited[ax][ay] = true;
+                        }
                     }
                 }
-
-                
+                id++;
             }
         }
-        
     }
+
 }
