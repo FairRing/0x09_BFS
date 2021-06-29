@@ -18,10 +18,10 @@
 | 14  | [2468](https://www.acmicpc.net/problem/2468)   | 안전 영역          |  O   |
 | 15  | [2573](https://www.acmicpc.net/problem/2573)   | 빙산               |  O   |
 | 16  | [5427](https://www.acmicpc.net/problem/5427)   | 불                 |  O   |
-| 17  | [2146](https://www.acmicpc.net/problem/2146)   | 다리 만들기        |  X   |
-| 18  | [5014](https://www.acmicpc.net/problem/5014)   | 스타트링크         |  X   |
-| 19  | [6593](https://www.acmicpc.net/problem/6593)   | 상범 빌딩          |  X   |
-| 20  | [13549](https://www.acmicpc.net/problem/13549) | 숨바꼭질 3         |  X   |
+| 17  | [2146](https://www.acmicpc.net/problem/2146)   | 다리 만들기        |  O   |
+| 18  | [5014](https://www.acmicpc.net/problem/5014)   | 스타트링크         |  O   |
+| 19  | [6593](https://www.acmicpc.net/problem/6593)   | 상범 빌딩          |  O   |
+| 20  | [13549](https://www.acmicpc.net/problem/13549) | 숨바꼭질 3         |  O   |
 | 21  | [13913](https://www.acmicpc.net/problem/13913) | 숨바꼭질 4 스페셜  |  X   |
 | 22  | [1600](https://www.acmicpc.net/problem/1600)   | 말이 되고픈 원숭이 |  X   |
 | 23  | [3197](https://www.acmicpc.net/problem/3197)   | 백조의 호수        |  X   |
